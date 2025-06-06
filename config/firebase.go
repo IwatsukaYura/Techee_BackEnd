@@ -30,8 +30,12 @@ func InitFirebase() {
 		ProjectID: projectID,
 	}
 
-	// サービスアカウントJSONのパスを指定
-	opt := option.WithCredentialsFile("config/serviceAccountKey.json")
+	// 環境変数からサービスアカウントキーファイルのパスを取得し、optionとして使用
+	serviceAccountKeyPath := os.Getenv("SERVICE_ACCOUNT_KEY_JSON") // Renderで設定したKey名
+	if serviceAccountKeyPath == "" {
+		log.Fatalf("SERVICE_ACCOUNT_KEY_JSON environment variable is not set")
+	}
+	opt := option.WithCredentialsFile(serviceAccountKeyPath) // 環境変数で指定されたパスを使用
 
 	// Firebase Appの初期化
 	app, err := firebase.NewApp(ctx, conf, opt)
