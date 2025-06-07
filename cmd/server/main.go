@@ -59,7 +59,7 @@ func main() {
 
 	// CORSミドルウェアを追加
 	e.Use(echoMiddleware.CORSWithConfig(echoMiddleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:3000"}, // フロントエンドのオリジンを許可
+		AllowOrigins: []string{"http://localhost:3000", "https://techee-front-end.vercel.app"}, // フロントエンドのオリジンを許可
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization},
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete, http.MethodOptions},
 	}))
