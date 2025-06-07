@@ -30,11 +30,15 @@ func InitFirebase() {
 		ProjectID: projectID,
 	}
 
-	// RenderのSecret Filesのデフォルトパスを指定
-	serviceAccountKeyPath := "/etc/secrets/serviceAccountKey.json" // ← このパスに修正
+	// サービスアカウントキーファイルのパスを環境変数から取得。なければRenderのデフォルトパスを使用。
+	serviceAccountKeyPath := os.Getenv("GOOGLE_APPLICATION_CREDENTIALS")
+	if serviceAccountKeyPath == "" {
+		log.Println("GOOGLE_APPLICATION_CREDENTIALS environment variable not set, using default Render path.")
+		serviceAccountKeyPath = "/etc/secrets/serviceAccountKey.json"
+	}
 
 	// Firebase Appの初期化
-	app, err := firebase.NewApp(ctx, conf, option.WithCredentialsFile(serviceAccountKeyPath)) // Renderでファイルが配置されるパスを使用
+	app, err := firebase.NewApp(ctx, conf, option.WithCredentialsFile(serviceAccountKeyPath)) // 環境変数またはデフォルトパスを使用
 	if err != nil {
 		log.Fatalf("failed to initialize firebase app: %v", err)
 	}

@@ -9,6 +9,7 @@ require (
 	firebase.google.com/go/v4 v4.16.0
 	github.com/labstack/echo/v4 v4.13.4
 	google.golang.org/api v0.236.0
+	google.golang.org/grpc v1.72.2
 )
 
 require (
@@ -67,6 +68,5 @@ require (
 	google.golang.org/genproto v0.0.0-20250505200425-f936aa4a68b2 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20250505200425-f936aa4a68b2 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250528174236-200df99c418a // indirect
-	google.golang.org/grpc v1.72.2 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 )
